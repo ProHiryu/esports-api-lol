@@ -1,12 +1,16 @@
-
 import json
-import urllib.request
+import requests
+from pprint import pprint
 
-url = 'http://esports-api.com/api/leagueoflegends/teams/11'
+url = "http://api.lolesports.com/api/v1/leagues?slug=worlds"
 
-uh = urllib.request.urlopen(url)
-input = uh.read()
-print(input)
+re = requests.get(url=url)
+
+if re.status_code == 200:
+    data = json.loads(re.text)
+    pprint(data)
+else:
+    print(re.status_code)
 
 
 #     "http://esports-api.com/api/leagueoflegends/teams/{teamId}"
